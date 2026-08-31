@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beihilfe und PKV in der Elternzeit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+button{font:inherit;color:inherit}
+:root{
+  --paper:#FBFAF7;--card:#FFFFFF;--fill:rgba(23,26,33,.043);
+  --line:rgba(23,26,33,.14);--line-soft:rgba(23,26,33,.08);
+  --ink:#171A21;--body:#5A6069;--muted:#9A9DA6;
+  --gold:#E9971B;--gold-text:#8A560A;--gold-light:#FFB95D;--gold-fill:rgba(233,151,27,.10);
+  --blue:#2F6BFF;--blue-fill:rgba(47,107,255,.06);
+  --teal:#2FA39C;--teal-fill:rgba(47,163,156,.08);
+  --alert:#A8321F;--alert-fill:rgba(168,50,31,.055);
+  --d1:#171D2B;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r-lg:26px;--r-md:16px;--r-sm:14px;
+  --shadow:0 1px 2px rgba(0,0,0,.06);
+  --shadow-lift:0 1px 2px rgba(0,0,0,.05),0 10px 30px rgba(23,26,33,.055);
+}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);color:var(--ink);margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5.6vw,3.4rem);font-weight:700;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.032em;line-height:1.1}
+h3{font-size:clamp(1.18rem,2vw,1.38rem);font-weight:600;letter-spacing:-.022em}
+h4{font-size:1.02rem;font-weight:600;letter-spacing:-.012em}
+p{margin:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:normal;font-weight:600;color:var(--gold-text)}
+a{color:var(--gold-text)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(1.1rem,5vw,2rem)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);display:inline-flex;align-items:center;gap:.7rem}
+.eyebrow::before{content:"";width:20px;height:1px;background:currentColor;opacity:.8;flex:none}
+.eyebrow.alert{color:var(--alert)}
+main{display:flex;flex-direction:column;gap:3.6rem;padding-bottom:4rem}
+section{display:flex;flex-direction:column;gap:1.25rem;scroll-margin-top:1.5rem}
+.prose{display:flex;flex-direction:column;gap:1rem;max-width:68ch}
+.shead{display:flex;flex-direction:column;gap:.8rem}
+
+header.cover{padding:clamp(2rem,6vw,3.2rem) 0 clamp(1.8rem,4vw,2.6rem)}
+.brandline{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-bottom:2.2rem}
+.logo{font-family:var(--display);font-weight:700;font-size:1.02rem;letter-spacing:-.03em;color:var(--ink)}
+.logo span{color:var(--gold-text)}
+.badge{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;background:var(--gold-fill);color:var(--gold-text);padding:.4rem .8rem;border-radius:999px}
+.cover h1 .g{color:var(--gold-text)}
+.lede{font-size:clamp(1rem,1.7vw,1.16rem);line-height:1.55;margin-top:1.2rem;max-width:60ch}
+
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-md);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+caption{caption-side:top;text-align:left;padding:.85rem 1.1rem;color:var(--muted);font-family:var(--mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--line-soft)}
+th,td{padding:.6rem .9rem;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--body)}
+thead th{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:400}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+tbody td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+td.hi{color:var(--gold-text);font-weight:600}
+tr.spec td{background:var(--teal-fill)}
+tr.spec td.n{color:#1c6b66}
+@media (max-width:640px){
+  table{min-width:0}
+  thead{display:none}
+  tbody tr{display:block;padding:.9rem 1.1rem;border-bottom:1px solid var(--line-soft)}
+  tbody td{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.24rem 0;border:none;text-align:left}
+  tbody td[data-l]::before{content:attr(data-l);flex:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:.3em}
+  tbody td:first-child{display:block;padding-bottom:.45rem;white-space:normal}
+  tbody td.n{text-align:right;white-space:normal}
+  tr.spec td{background:none}
+  tr.spec{background:var(--teal-fill)}
+}
+
+.box{border:1px solid var(--line-soft);border-left:3px solid var(--gold);background:var(--card);border-radius:var(--r-sm);padding:1.1rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;max-width:72ch;box-shadow:var(--shadow)}
+.box .h{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-text)}
+.box p{font-size:.95rem}
+.box.blue{border-left-color:var(--blue);background:var(--blue-fill)}
+.box.blue .h{color:var(--blue)}
+.box.teal{border-left-color:var(--teal);background:var(--teal-fill)}
+.box.teal .h{color:#1c6b66}
+.box.alert{border-left-color:var(--alert);background:var(--alert-fill)}
+.box.alert .h{color:var(--alert)}
+
+.cards{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-md);padding:1.25rem;display:flex;flex-direction:column;gap:.5rem;box-shadow:var(--shadow)}
+.card .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.card p{font-size:.93rem}
+
+ul.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.62rem;max-width:70ch}
+ul.plain li{position:relative;padding-left:1.45rem;font-size:.96rem}
+ul.plain li::before{content:"";position:absolute;left:0;top:.66em;width:8px;height:2px;border-radius:2px;background:var(--gold)}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:.9rem;max-width:70ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:2.5rem;font-size:.96rem}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:.12em;font-family:var(--mono);font-size:.74rem;color:var(--gold-text)}
+
+.flowbox{background:var(--d1);border-radius:var(--r-lg);padding:clamp(1.5rem,4vw,2.2rem);box-shadow:var(--shadow-lift);display:flex;flex-direction:column;gap:.9rem}
+.flowbox .k{font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
+.fline{display:flex;justify-content:space-between;gap:.5rem 1rem;align-items:baseline;flex-wrap:wrap;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.78);font-size:.95rem}
+.fline:last-child{border-bottom:none}
+.fline b{color:#fff;font-weight:600}
+.fline .v{font-family:var(--mono);color:var(--gold-light);font-variant-numeric:tabular-nums;font-size:.9rem}
+@media (max-width:560px){.fline{flex-direction:column;gap:.2rem}}
+
+.legal{background:var(--fill);border-radius:var(--r-md);padding:1.3rem 1.5rem;display:flex;flex-direction:column;gap:.6rem;font-size:.85rem;line-height:1.58}
+.legal .h{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+.srcs{font-size:.8rem;line-height:1.75;color:var(--muted)}
+.srcs b{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);display:block;margin-bottom:.4rem}
+
+section.intern{border-top:2px solid var(--alert);padding-top:1.6rem}
+ul.checkpoints{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+ul.checkpoints li{background:var(--card);border:1px solid var(--line-soft);border-left:3px solid var(--alert);border-radius:var(--r-sm);padding:.95rem 1.15rem;font-size:.93rem;box-shadow:var(--shadow)}
+footer{margin-top:1.2rem;color:var(--muted);font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;line-height:1.9}
+@media print{
+  body{background:#fff}
+  .flowbox{background:#fff;border:1px solid #ccc}
+  .flowbox .k{color:#8A560A}.fline{color:#333;border-color:#ddd}.fline b{color:#111}.fline .v{color:#8A560A}
+  .box,.card,.tw,.legal,ul.checkpoints li{box-shadow:none;break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+
+/* ---------- Dienstherr-Auswahl ---------- */
+.picker{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
+.pbtn{display:flex;align-items:center;gap:.6rem;text-align:left;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:999px;padding:.6rem .9rem;cursor:pointer;
+  font-size:.9rem;color:var(--ink);box-shadow:var(--shadow);
+  transition:border-color .15s,background .15s,transform .12s}
+.pbtn:hover{border-color:var(--line);transform:translateY(-1px)}
+.pbtn .ab{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted);
+  background:var(--fill);border-radius:999px;padding:.2rem .45rem;flex:none;min-width:2.5rem;text-align:center}
+.pbtn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.pbtn[aria-pressed="true"] .ab{background:rgba(255,255,255,.14);color:var(--gold-light)}
+
+.result{margin-top:.4rem}
+.rempty{border:1px dashed var(--line);border-radius:var(--r-md);padding:1.6rem 1.2rem;
+  text-align:center;color:var(--muted);font-size:.95rem}
+.rcard{background:var(--card);border:1px solid var(--line-soft);border-top:3px solid var(--muted);
+  border-radius:var(--r-md);box-shadow:var(--shadow-lift);overflow:hidden}
+.rcard.up{border-top-color:var(--gold)}
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;
+  padding:1.2rem 1.3rem 1rem}
+.rverdict{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.02em;
+  color:var(--body);max-width:22ch;text-align:right}
+.rcard.up .rverdict{color:var(--gold-text)}
+.rk{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.25rem}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.rcell{background:var(--card);padding:.9rem 1rem;display:flex;flex-direction:column;gap:.2rem}
+.rcell.hot{background:var(--gold-fill)}
+.rl{font-size:.76rem;color:var(--muted);line-height:1.3}
+.rv{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.035em;color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.rcell.hot .rv{color:var(--gold-text)}
+.rnote{padding:1rem 1.3rem;background:var(--blue-fill);font-size:.92rem;border-bottom:1px solid var(--line-soft)}
+.rnote .rk{color:var(--blue)}
+.rfoot{padding:1rem 1.3rem;display:flex;flex-direction:column;gap:.8rem;font-size:.9rem}
+.rsrc{font-family:var(--mono);font-size:.78rem;color:var(--body)}
+
+details.alltable{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-md);
+  box-shadow:var(--shadow);overflow:hidden}
+details.alltable > summary{list-style:none;cursor:pointer;padding:.9rem 1.2rem;display:flex;align-items:center;
+  gap:.8rem;font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--ink);letter-spacing:-.02em}
+details.alltable > summary::-webkit-details-marker{display:none}
+details.alltable > summary .arw{flex:none;width:8px;height:8px;border-right:1.5px solid var(--muted);
+  border-bottom:1.5px solid var(--muted);transform:rotate(45deg);transition:transform .18s}
+details.alltable[open] > summary .arw{transform:rotate(-135deg)}
+details.alltable .tw{border:none;border-top:1px solid var(--line-soft);border-radius:0;box-shadow:none}
+@media (min-width:900px){
+  details.alltable > summary{display:none}
+  details.alltable .tw{border-top:none}
+}
+
+/* ---------- Terminaufruf ---------- */
+.cta{background:var(--d1);border-radius:var(--r-lg);padding:clamp(1.7rem,4vw,2.5rem);display:flex;flex-direction:column;gap:.9rem;box-shadow:var(--shadow-lift)}
+.cta h3{color:#fff;font-size:clamp(1.3rem,2.6vw,1.7rem);max-width:24ch}
+.cta p{color:rgba(255,255,255,.72);max-width:58ch;font-size:.97rem}
+.btn{align-self:flex-start;margin-top:.4rem;background:var(--gold);color:#14161A;font-weight:600;
+  font-size:1rem;padding:.9rem 1.7rem;border-radius:999px;text-decoration:none;
+  transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+@media print{
+  .cta{background:#fff;border:1px solid #ccc}
+  .cta h3{color:#111}.cta p{color:#333}.cta .eyebrow{color:#8A560A!important}
+  .btn{background:#fff;color:#111;border:1px solid #111;padding:.4rem 1rem}
+}
+
+@media print{
+  .picker,.result{display:none}
+  details.alltable > summary{display:none}
+  details.alltable .tw{border-top:none}
+}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="brandline">
+      <div class="logo">BEAMTEN<span>HAHN</span></div>
+      <div class="badge">Rechtsstand 31. August 2026</div>
+    </div>
+    <div class="eyebrow">Beihilfe und PKV in der Elternzeit</div>
+    <h1>Dein PKV-Beitrag muss<br>in der Elternzeit nicht<br><span class="g">gleich hoch bleiben.</span></h1>
+    <p class="lede">Bei manchen Dienstherren steigt dein Beihilfebemessungssatz während der Elternzeit — schon beim ersten Kind. Dann muss die private Krankenversicherung weniger absichern. Bei anderen Dienstherren passiert genau das nicht. Welche Gruppe für dich gilt, steht in der Übersicht.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 01 MECHANIK -->
+<section id="mechanik">
+  <div class="shead">
+    <div class="eyebrow">01 — Die Mechanik</div>
+    <h2>Warum der Beihilfesatz den Beitrag bewegt</h2>
+  </div>
+
+  <div class="prose">
+    <p>Die beihilfekonforme private Krankenversicherung ist eine Restkostenversicherung. Hat ein Beamter 50 Prozent Beihilfe, übernimmt der Dienstherr grundsätzlich die Hälfte der beihilfefähigen Aufwendungen — die PKV wird so abgeschlossen, dass sie die andere Hälfte deckt. Vereinfacht: 50 Prozent Beihilfe, 50 Prozent PKV.</p>
+    <p>Steigt der persönliche Bemessungssatz auf 70 Prozent, verschiebt sich diese Aufteilung. Der Dienstherr übernimmt dann 70 Prozent, die PKV muss nur noch 30 Prozent absichern. Aus einem 50-Prozent-Tarif kann ein 30-Prozent-Tarif werden.</p>
+  </div>
+
+  <div class="box alert">
+    <div class="h">Der häufigste Denkfehler</div>
+    <p>Ein Wechsel von 50 auf 30 Prozent Versicherungsschutz senkt den Beitrag <strong>nicht</strong> um 40 Prozent. Kostet ein 50-Prozent-Tarif 400 Euro, sind es bei 30 Prozent nicht automatisch 240 Euro. Die Beitragshöhe hängt vom Versicherer, vom Tarif, von den Alterungsrückstellungen, der privaten Pflegepflichtversicherung und möglichen Ergänzungstarifen ab. Die Richtung stimmt, die Rechnung nicht.</p>
+  </div>
+
+  <div class="flowbox">
+    <div class="k">Beispiel Bundesbeamter, ein Kind</div>
+    <div class="fline"><span>Vor der Elternzeit</span><span class="v">50 % Beihilfe · 50 % PKV</span></div>
+    <div class="fline"><span><b>Während der Elternzeit</b></span><span class="v">70 % Beihilfe · 30 % PKV</span></div>
+    <div class="fline"><span>Nach der Elternzeit, weiterhin ein Kind</span><span class="v">50 % Beihilfe · 50 % PKV</span></div>
+    <div class="fline"><span>Ab dem zweiten berücksichtigungsfähigen Kind</span><span class="v">70 % Beihilfe · 30 % PKV</span></div>
+  </div>
+
+  <div class="prose">
+    <p>Beim ersten Kind ist der höhere Satz also nur eine Etappe. Er endet mit der Elternzeit. Erst das zweite berücksichtigungsfähige Kind bringt die 70 Prozent dauerhaft — dann nämlich nicht mehr wegen der Elternzeit, sondern wegen der Kinderzahl.</p>
+  </div>
+</section>
+
+<!-- 02 AUSWAHL -->
+<section id="uebersicht">
+  <div class="shead">
+    <div class="eyebrow">02 — Deine Regelung</div>
+    <h2>Wähl deinen Dienstherrn</h2>
+  </div>
+
+  <div class="prose">
+    <p>Gilt für die klassische individuelle Beihilfe aktiver Beamter ohne Heilfürsorge. Pauschale Beihilfe, gesetzliche Krankenversicherung und Heilfürsorge folgen anderen Regeln.</p>
+  </div>
+
+  <div class="picker" id="picker" role="group" aria-label="Dienstherr auswählen"></div>
+
+  <div class="result" id="result" aria-live="polite">
+    <div class="rempty">Tippe oben auf deinen Dienstherrn.</div>
+  </div>
+
+  <details class="alltable" id="alltable">
+    <summary><span class="arw"></span>Alle 17 Dienstherren als Tabelle</summary>
+    <div class="tw">
+      <table>
+        <caption>Beihilfebemessungssatz des Beamten · Stand 31.08.2026</caption>
+        <thead>
+          <tr><th>Dienstherr</th><th class="n">1 Kind regulär</th><th class="n">Elternzeit, 1 Kind</th><th class="n">ab 2 Kindern</th><th>Rechtsgrundlage</th></tr>
+        </thead>
+        <tbody id="fulltable"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <div class="box">
+    <div class="h">So liest du die Zahlen</div>
+    <p>Die Prozentsätze sind <strong>Beihilfebemessungssätze</strong>, nicht Beitragshöhen. Der Rest bis 100 Prozent ist der Anteil, den deine private Krankenversicherung grundsätzlich absichern muss. 70 Prozent Beihilfe heißt also 30 Prozent Restkostenschutz — nicht, dass dein Beitrag um 40 Prozent sinkt.</p>
+    <p>Berücksichtigungsfähig heißt: Das Kind wird im Familienzuschlag berücksichtigt. Sind beide Elternteile beihilfeberechtigt, wird der erhöhte Satz in aller Regel nur einem von beiden gewährt — dem, der den kinderbezogenen Familienzuschlag erhält.</p>
+  </div>
+
+  <div class="box alert">
+    <div class="h">Keine Pauschale für jeden</div>
+    <p>Die genannten Erstattungsbeträge sind Höchstbeträge, keine automatischen Zahlungen. Je nach Dienstherr gelten Einkommensgrenzen, Besoldungsgrenzen, Anforderungen an den Elterngeldbezug und Vorgaben zur Teilzeit. „Voller Beitrag" meint immer den auf den Beihilfebemessungssatz abgestimmten Kranken- und Pflegeversicherungsschutz — nicht sämtliche Zusatz- und Ergänzungstarife.</p>
+  </div>
+</section>
+
+<!-- 03 DREI GRUPPEN -->
+<section id="gruppen">
+  <div class="shead">
+    <div class="eyebrow">03 — Der Überblick</div>
+    <h2>Wo die Elternzeit selbst der Hebel ist</h2>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="k">Gruppe 1 · Elternzeit hebt an</div>
+      <h4>Bund, Bayern, Berlin, Brandenburg, Mecklenburg-Vorpommern, Sachsen-Anhalt</h4>
+      <p>Hier steigt der Bemessungssatz während der Elternzeit auf 70 Prozent — schon beim ersten Kind, allein wegen der Elternzeit. Beim Bund steht das wörtlich in § 46 Abs. 3 Satz 5 BBhV, in Bayern in Art. 96 Abs. 3 BayBG, in Mecklenburg-Vorpommern in § 80 Abs. 5 LBG M-V.</p>
+    </div>
+    <div class="card">
+      <div class="k">Gruppe 2 · Nur die Kinderzahl zählt</div>
+      <h4>Baden-Württemberg, Bremen, Hamburg, Niedersachsen, NRW, Rheinland-Pfalz, Saarland, Schleswig-Holstein, Thüringen</h4>
+      <p>Beim ersten Kind bleibt es auch während der Elternzeit bei 50 Prozent. Auf 70 Prozent geht es erst ab dem zweiten berücksichtigungsfähigen Kind. Die Elternzeit lohnt sich hier trotzdem — über die Beitragserstattung.</p>
+    </div>
+    <div class="card">
+      <div class="k">Gruppe 3 · Eigene Systematik</div>
+      <h4>Sachsen und Hessen</h4>
+      <p>Beide Länder folgen nicht dem Muster 50/70. Sachsen ist deutlich großzügiger, Hessen rechnet in Fünf-Prozent-Schritten. Details unten.</p>
+    </div>
+  </div>
+
+  <div class="box teal">
+    <div class="h">Sachsen — der Ausreißer nach oben</div>
+    <p>Sachsen kennt drei Stufen: ohne Kind 50 Prozent, mit <strong>einem</strong> berücksichtigungsfähigen Kind bereits <strong>70 Prozent</strong>, ab zwei Kindern <strong>90 Prozent</strong>. Ein sächsischer Beamter braucht mit einem Kind also nur rund 30 Prozent Restkostenschutz und ab zwei Kindern nur noch etwa 10 Prozent.</p>
+    <p>Eine Elternzeitregelung braucht Sachsen dafür nicht — die 70 Prozent gelten ohnehin, in der Elternzeit wie davor und danach. Sind beide Eltern beihilfeberechtigt, wird der erhöhte Satz nur einem von beiden gewährt.</p>
+    <p>Achtung bei alten Quellen: Die Sätze stehen seit dem Vierten Dienstrechtsänderungsgesetz in § 80 Abs. 7 SächsBG, nicht mehr in § 57 SächsBhVO. Viele Portale zeigen noch die alte Fassung mit 70 Prozent erst ab zwei Kindern.</p>
+  </div>
+
+  <div class="box teal">
+    <div class="h">Hessen — Stufen statt Sprünge</div>
+    <p>Der Ausgangssatz beträgt 50 Prozent und erhöht sich um <strong>5 Prozentpunkte je berücksichtigungsfähiger Person</strong>, höchstens auf 70 Prozent. Ein Kind bringt also 55 Prozent, zwei Kinder 60 Prozent. Die 70 Prozent werden erst bei vier berücksichtigungsfähigen Personen erreicht — etwa Ehegatte und drei Kinder.</p>
+    <p>Das ist der Punkt, an dem die meisten Übersichten falsch liegen: In Hessen bedeuten zwei Kinder eben <em>nicht</em> 70 Prozent. Angehörige, die in der gesetzlichen Krankenversicherung pflichtversichert sind, erhöhen den Satz zudem gar nicht.</p>
+  </div>
+
+  <div class="box blue">
+    <div class="h">NRW — Änderung beschlossen, aber noch nicht in Kraft</div>
+    <p>Nach geltendem Recht bleibt es in Nordrhein-Westfalen beim ersten Kind auch während der Elternzeit bei 50 Prozent. Das Wort „Elternzeit" kommt in § 75 LBG NRW nicht vor.</p>
+    <p>Die Landesregierung hat aber ein Gesetz zur Modernisierung des öffentlichen Dienstes eingebracht, das genau diesen Satz ergänzen soll: „Der Bemessungssatz für Beihilfeberechtigte, die Elternzeit in Anspruch nehmen, beträgt 70 Prozent." Erste Lesung war am 15. Juli 2026, das Inkrafttreten ist für den <strong>1. Januar 2027</strong> vorgesehen. Bis dahin gilt die alte Regel.</p>
+  </div>
+
+  <div class="box blue">
+    <div class="h">Rheinland-Pfalz — Besitzstand während der Elternzeit</div>
+    <p>Beim ersten Kind bleibt es bei 50 Prozent. Wer aber schon <em>vor</em> Beginn der Elternzeit 70 Prozent hatte, etwa wegen zweier Kinder, behält diesen Satz während der Elternzeit. Das steht wörtlich in § 57 BVO Rheinland-Pfalz.</p>
+  </div>
+</section>
+
+<!-- 04 ANTRAG -->
+<section id="antrag">
+  <div class="shead">
+    <div class="eyebrow">04 — Der Antrag</div>
+    <h2>Die volle Erstattung bekommt nur, wer sie beantragt</h2>
+  </div>
+
+  <div class="prose">
+    <p>Das ist der Punkt, an dem in der Praxis das meiste Geld liegen bleibt — und er hat nichts mit Beihilfesätzen zu tun.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="k">Läuft automatisch</div>
+      <h4>Der Grundbetrag</h4>
+      <p>Die 31 Euro — je nach Dienstherr 30, 30,68 oder 42 Euro — zahlt die Bezügestelle von sich aus, sobald ihr ein Versicherungsschein vorliegt. Voraussetzung ist nur, dass deine Bezüge vor Beginn der Elternzeit unter der Versicherungspflichtgrenze der gesetzlichen Krankenversicherung lagen. Familienzuschlag zählt dabei nicht mit.</p>
+    </div>
+    <div class="card">
+      <div class="k">Nur auf Antrag</div>
+      <h4>Die volle Erstattung</h4>
+      <p>Bis Besoldungsgruppe A 8 und für Anwärter übernehmen viele Dienstherren den kompletten Kranken- und Pflegeversicherungsbeitrag. Beim Bund steht das in § 9 Abs. 2 MuSchEltZV: „über die Erstattung nach Absatz 1 hinaus in voller Höhe erstattet" — aber ausdrücklich <strong>auf Antrag</strong>. Ohne Antrag bleibt es bei den 31 Euro, und niemand meldet sich deswegen bei dir.</p>
+    </div>
+  </div>
+
+  <h3>So stellst du ihn</h3>
+  <ol class="steps">
+    <li>Der Antrag geht an deine <strong>Bezügestelle</strong>, nicht an die Beihilfestelle. Das wird häufig verwechselt und kostet Wochen.</li>
+    <li>Beilegen: Versicherungsschein deiner Kranken- und Pflegeversicherung mit ausgewiesenem Beitrag, dazu der Elterngeldbescheid.</li>
+    <li>Am besten gleich zusammen mit dem Antrag auf Elternzeit einreichen — dann läuft beides parallel.</li>
+  </ol>
+
+  <div class="box alert">
+    <div class="h">Drei Dinge, die die Erstattung kippen</div>
+    <p><strong>Eine Beförderung während der Elternzeit.</strong> Steigst du über A 8, fällt die Erstattung auf den Grundbetrag zurück.</p>
+    <p><strong>Teilzeit während der Elternzeit.</strong> Wer arbeitet, muss auch den Grundbetrag beantragen — automatisch läuft er nur ohne Beschäftigung. Bei einer Beschäftigung ab der Hälfte der regelmäßigen Arbeitszeit entfällt die volle Erstattung.</p>
+    <p><strong>Gemeinsame Elternzeit.</strong> Nehmen beide Eltern Elternzeit, bekommt nur derjenige die Erstattung, bei dem das Kind im Familienzuschlag berücksichtigt wird.</p>
+  </div>
+
+  <div class="box">
+    <div class="h">Nicht überall gibt es die volle Erstattung</div>
+    <p>Baden-Württemberg, Hamburg, Schleswig-Holstein und Bayern arbeiten mit gedeckelten Beträgen statt mit einer vollständigen Übernahme — in Baden-Württemberg etwa 120 Euro für A 7 bis A 9, in Hamburg 42 Euro plus bis zu 120 Euro zusätzlich. Was für dich gilt, steht oben in deiner Ergebniskarte.</p>
+  </div>
+</section>
+
+<!-- 05 SONDERFÄLLE -->
+<section id="sonderfaelle">
+  <div class="shead">
+    <div class="eyebrow">05 — Was oft übersehen wird</div>
+    <h2>Fünf Konstellationen mit Fallstricken</h2>
+  </div>
+
+  <h3>Zwei verbeamtete Elternteile</h3>
+  <div class="prose">
+    <p>Es ist nicht so, dass bei zwei Kindern beide Elternteile 70 Prozent bekommen. Der erhöhte Satz wird in aller Regel nur einem gewährt — dem, der den kinderbezogenen Familienzuschlag erhält. Wer das ist, muss festgelegt werden, und die Entscheidung hat Geld zur Folge: Ein Elternteil braucht dann nur 30 Prozent PKV-Schutz, der andere weiterhin 50 Prozent.</p>
+  </div>
+
+  <h3>Das Kind hat einen eigenen Satz</h3>
+  <div class="prose">
+    <p>Der Bemessungssatz des Kindes ist nicht der des Elternteils. In den klassischen Systemen erhalten berücksichtigungsfähige Kinder <strong>80 Prozent</strong>. Für das Kind wird deshalb meist nur eine Restkostenversicherung über 20 Prozent gebraucht. Nach der Geburt sind also drei Dinge gleichzeitig zu prüfen: dein eigener Satz, der Satz des Kindes und die passenden Tarife für beide.</p>
+  </div>
+
+  <h3>Teilzeit während der Elternzeit</h3>
+  <div class="prose">
+    <p>Der Beihilfeanspruch verschwindet nicht, nur weil du in der Elternzeit arbeitest. Bei der Beitragserstattung sieht es anders aus: Dort gelten häufig Arbeitszeitgrenzen, meist die Hälfte der regelmäßigen Arbeitszeit. Wer 20 oder 25 Stunden arbeitet, sollte den Anspruch gezielt prüfen lassen.</p>
+  </div>
+
+  <h3>Das Ende der Elternzeit</h3>
+  <div class="prose">
+    <p>Wurde der PKV-Schutz während der Elternzeit von 50 auf 30 Prozent reduziert, darf er nicht unverändert weiterlaufen, wenn der Bemessungssatz danach wieder auf 50 Prozent fällt. Sonst entsteht eine Deckungslücke von 20 Prozent — und die fällt erst auf, wenn eine größere Rechnung kommt. Prüfe deshalb zweimal: zu Beginn und zum Ende der Elternzeit.</p>
+  </div>
+
+  <h3>Jahre später</h3>
+  <div class="prose">
+    <p>Der Bemessungssatz ist keine Zahl, die einmal festgelegt wird und bis zur Pension gilt. Fällt eines von zwei Kindern aus der Berücksichtigungsfähigkeit heraus, können die 70 Prozent entfallen und der PKV-Schutz muss wieder von 30 auf 50 Prozent steigen. In Baden-Württemberg gibt es dazu eine Ausnahme: Waren einmal drei oder mehr Kinder berücksichtigungsfähig, vermindert sich der Satz bei Wegfall von Kindern nicht.</p>
+  </div>
+
+  <div class="box">
+    <div class="h">Pauschale Beihilfe und GKV</div>
+    <p>Wer sich für die pauschale Beihilfe entschieden hat oder gesetzlich versichert ist, kann diese Rechnung nicht anwenden. Dort beteiligt sich der Dienstherr nach einem anderen System an den Krankenversicherungskosten. Diese Fälle gehören separat betrachtet.</p>
+  </div>
+</section>
+
+<!-- 06 CHECKLISTE -->
+<section id="checkliste">
+  <div class="shead">
+    <div class="eyebrow">06 — Vor der Elternzeit</div>
+    <h2>Was du klären solltest</h2>
+  </div>
+
+  <ol class="steps">
+    <li>Welcher Dienstherr — Bund oder Land? Danach richtet sich alles Weitere.</li>
+    <li>Steigt bei diesem Dienstherrn der Bemessungssatz während der Elternzeit, oder nicht?</li>
+    <li>Wie viele berücksichtigungsfähige Kinder hast du, und wer von euch erhält den kinderbezogenen Familienzuschlag?</li>
+    <li>Welche Besoldungsgruppe? Bei der Beitragserstattung entscheidet oft die Grenze A 8, in Bayern zusätzlich A 11, in Baden-Württemberg die Spanne A 7 bis A 9.</li>
+    <li>Planst du Teilzeit während der Elternzeit? Dann die Arbeitszeitgrenze für die Erstattung prüfen.</li>
+    <li>Individuelle oder pauschale Beihilfe?</li>
+    <li>Passt der PKV-Tarif zum künftigen Bemessungssatz — und ist der Wechsel rechtzeitig beantragt?</li>
+    <li>Ist der Rückweg geklärt? Am Ende der Elternzeit muss der Tarif oft wieder angepasst werden.</li>
+  </ol>
+
+  <div class="box">
+    <div class="h">Die Kernaussage</div>
+    <p>Elternzeit heißt für Beamte nicht automatisch, dass der bisherige PKV-Beitrag unverändert weiterläuft. Je nach Dienstherr kann der Bemessungssatz steigen, der nötige Schutz sinken und zusätzlich eine Beitragserstattung greifen. Wie groß der Vorteil ist, zeigt aber erst der Blick in die Vorschriften deines Dienstherrn — und in deinen Tarif.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="termin">
+  <div class="cta">
+    <div class="eyebrow" style="color:var(--gold-light)">Der nächste Schritt</div>
+    <h3>Lass deinen Tarif prüfen, bevor die Elternzeit beginnt.</h3>
+    <p>Ob sich dein Bemessungssatz ändert, ob dein Tarif dazu passt und ob du eine Beitragserstattung beantragen kannst — das lässt sich in einem Gespräch klären. Ich berate seit über zehn Jahren ausschließlich den öffentlichen Dienst: Krankenversicherung, Dienstunfähigkeit, Pension und Vermögensaufbau. Kein Vertrieb, keine Standardpakete.</p>
+    <a class="btn" href="https://beamtenhahn.de/kontakt" target="_blank" rel="noopener">Termin buchen</a>
+  </div>
+</section>
+
+<!-- RECHTLICHES -->
+<section id="rechtliches">
+  <div class="legal">
+    <div class="h">Wichtiger Hinweis</div>
+    <p>Dieser Leitfaden ist eine allgemeine Information und ausdrücklich <strong>keine Beratung im Einzelfall</strong>. Er ersetzt weder eine Rechtsberatung noch eine individuelle Versicherungsberatung. Beihilferecht ist Landesrecht und ändert sich laufend; maßgeblich sind immer die aktuellen Vorschriften deines Dienstherrn und die Auskunft deiner Beihilfestelle.</p>
+    <p>Alle Angaben wurden am 31. August 2026 anhand der genannten Rechtsgrundlagen und amtlicher Merkblätter recherchiert. Für Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen, eine Haftung ist ausgeschlossen, soweit gesetzlich zulässig.</p>
+  </div>
+
+  <div class="srcs">
+    <b>Rechtsgrundlagen</b>
+    § 46 Abs. 2 und 3 BBhV · § 9 MuSchEltZV · § 14 Abs. 1 BVO Baden-Württemberg · § 47 AzUVO · Art. 96 Abs. 3 BayBG · § 26 UrlMV Bayern · § 76 Abs. 3 LBG Berlin · § 46 Abs. 2 LBhVO Berlin · § 62 LBG Brandenburg · § 12 Abs. 2 BremBVO · § 80 Abs. 9 HmbBG · § 5 HmbEltZVO · § 15 Abs. 1 HBeihVO · § 80 Abs. 5 LBG Mecklenburg-Vorpommern · § 43 NBhVO · § 81 NBG · § 75 Abs. 7 LBG NRW · § 12 BVO NRW · § 13 FrUrlV NRW · § 57 BVO Rheinland-Pfalz · § 19e UrlVO Rheinland-Pfalz · § 15 Abs. 1 BhVO Saarland · § 5 EltZVO Saarland · § 80 Abs. 7 und § 80b SächsBG · § 3 BesVersEG Sachsen-Anhalt · § 7 Abs. 1 BhVO Schleswig-Holstein · § 5 EZVO Schleswig-Holstein · § 72 Abs. 4 ThürBG · § 20 ThürUrlVO · Landtag NRW, Drucksache 18/20439 und Vorlage 18/5099
+  </div>
+
+  <footer>Beamtenhahn · Beihilfe und PKV in der Elternzeit · Rechtsstand 31.08.2026</footer>
+</section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var DATA = [
+    {n:"Bund", s:"BUND", r:50, e:70, z:70, g:"§ 46 Abs. 3 S. 5 BBhV",
+     eg:"31 €", ee:"Bis A 8 und Anwärter auf Antrag voller Beitrag während des Elterngeldbezugs (§ 9 Abs. 2 MuSchEltZV).", h:""},
+    {n:"Baden-Württemberg", s:"BW", r:50, e:50, z:70, g:"§ 14 Abs. 1 BVO",
+     eg:"42 €", ee:"A 7 bis A 9, Vorbereitungsdienst und Auszubildende bis 120 € (§ 47 AzUVO).", h:"Waren einmal drei oder mehr Kinder berücksichtigungsfähig, sinkt der Satz beim Wegfall eines Kindes nicht wieder."},
+    {n:"Bayern", s:"BY", r:50, e:70, z:70, g:"Art. 96 Abs. 3 BayBG",
+     eg:"30 €", ee:"Bis A 11 bis 80 €; bis A 8 weitergehende Erstattung (§ 26 UrlMV).", h:"Hier treffen beide Effekte zusammen: höherer Bemessungssatz und Beitragserstattung."},
+    {n:"Berlin", s:"BE", r:50, e:70, z:70, g:"§ 46 Abs. 2 LBhVO",
+     eg:"nicht belegt", ee:"Eine Erstattung besteht, der Höchstbetrag ließ sich nicht am amtlichen Verordnungstext belegen. Bei der Beihilfestelle erfragen.", h:""},
+    {n:"Brandenburg", s:"BB", r:50, e:70, z:70, g:"§ 62 LBG i. V. m. BBhV",
+     eg:"31 €", ee:"Bis A 8 und Anwärter auf Antrag voller Beitrag.", h:""},
+    {n:"Bremen", s:"HB", r:50, e:50, z:70, g:"§ 12 Abs. 2 BremBVO",
+     eg:"31 €", ee:"Bis A 8 und Anwärter auf Antrag voller Beitrag.", h:"Die Elternzeit allein hebt den Satz beim ersten Kind nicht an."},
+    {n:"Hamburg", s:"HH", r:50, e:50, z:70, g:"§ 80 Abs. 9 HmbBG",
+     eg:"42 €", ee:"Bis A 8 zusätzlich bis 120 € für die beihilfekonforme PKV (§ 5 HmbEltZVO) — die 120 € kommen zu den 42 € hinzu.", h:""},
+    {n:"Hessen", s:"HE", r:55, e:55, z:60, g:"§ 15 Abs. 1 HBeihVO",
+     eg:"31 €", ee:"Bis A 8 voller Beitrag; keine Erstattung während einer Teilzeitbeschäftigung.", h:"Stufenmodell: 50 % plus 5 Prozentpunkte je berücksichtigungsfähiger Person, höchstens 70 %. Zwei Kinder ergeben 60 %, nicht 70 %. Die 70 % werden erst bei vier berücksichtigungsfähigen Personen erreicht."},
+    {n:"Mecklenburg-Vorpommern", s:"MV", r:50, e:70, z:70, g:"§ 80 Abs. 5 LBG M-V",
+     eg:"nicht belegt", ee:"Eine Erstattung besteht (§ 7 EltZLVO), der Höchstbetrag ließ sich nicht am amtlichen Verordnungstext belegen. Bei der Beihilfestelle erfragen.", h:""},
+    {n:"Niedersachsen", s:"NI", r:50, e:50, z:70, g:"§ 43 NBhVO",
+     eg:"31 €", ee:"Bis A 8 bei Elterngeldbezug voller Beitrag (über die Verweisung in § 81 NBG).", h:"Das Wort Elternzeit kommt in § 43 NBhVO nicht vor."},
+    {n:"Nordrhein-Westfalen", s:"NW", r:50, e:50, z:70, g:"§ 75 Abs. 7 LBG, § 12 BVO",
+     eg:"31 €", ee:"Bis A 8 und Vorbereitungsdienst auf Antrag voller Beitrag (§ 13 FrUrlV).", h:"Änderung eingebracht: Der Satz soll während der Elternzeit auf 70 % steigen. Erste Lesung war am 15.07.2026, das Inkrafttreten ist für den 1. Januar 2027 vorgesehen. Bis dahin gilt die alte Regel."},
+    {n:"Rheinland-Pfalz", s:"RP", r:50, e:50, z:70, g:"§ 57 BVO",
+     eg:"30,68 €", ee:"Bis A 8 und Vorbereitungsdienst auf Antrag voller Beitrag.", h:"Besitzstand: Wer schon vor Beginn der Elternzeit 70 % hatte, behält diesen Satz während der Elternzeit."},
+    {n:"Saarland", s:"SL", r:50, e:50, z:70, g:"§ 15 Abs. 1 BhVO",
+     eg:"30,70 €", ee:"Bis A 8 voller Beitrag während des Elterngeldbezugs (§ 5 EltZVO).", h:""},
+    {n:"Sachsen", s:"SN", r:70, e:70, z:90, g:"§ 80 Abs. 7 SächsBG", spec:true,
+     eg:"eigenes System", ee:"Keine elternzeitspezifische Erstattung. Stattdessen § 80b SächsBG: Erstattung für berücksichtigungsfähige Angehörige, ohne Besoldungsgruppengrenzen.", h:"Sachsen ist großzügiger als alle anderen: schon mit einem Kind 70 %, ab zwei Kindern 90 % — dann bleiben nur rund 10 % Restkostenschutz. Eine Elternzeitregelung braucht das Land dafür nicht."},
+    {n:"Sachsen-Anhalt", s:"ST", r:50, e:70, z:70, g:"BBhV entsprechend",
+     eg:"nicht belegt", ee:"Eine Erstattung besteht über die Anwendung der Bundesregelung, der Höchstbetrag ließ sich nicht am Landesnormtext belegen. Bei der Beihilfestelle erfragen.", h:""},
+    {n:"Schleswig-Holstein", s:"SH", r:50, e:50, z:70, g:"§ 7 Abs. 1 BhVO",
+     eg:"31 €", ee:"Bis A 8 und Vorbereitungsdienst zusätzlich bis 80 € (§ 5 EZVO) — die 80 € kommen zu den 31 € hinzu.", h:""},
+    {n:"Thüringen", s:"TH", r:50, e:50, z:70, g:"§ 72 Abs. 4 ThürBG",
+     eg:"nicht belegt", ee:"Eine Erstattung besteht (§ 20 ThürUrlVO), der Höchstbetrag ließ sich nicht am amtlichen Verordnungstext belegen. Bei der Beihilfestelle erfragen.", h:""}
+  ];
+
+  var picker = document.getElementById("picker");
+  var result = document.getElementById("result");
+  var full   = document.getElementById("fulltable");
+  if (!picker || !result) return;
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  /* Auswahlknöpfe */
+  DATA.forEach(function(d, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "pbtn";
+    b.setAttribute("aria-pressed","false");
+    b.dataset.i = i;
+    b.innerHTML = '<span class="ab">' + esc(d.s) + '</span>' + esc(d.n);
+    picker.appendChild(b);
+  });
+
+  /* Vollständige Tabelle */
+  if (full) {
+    DATA.forEach(function(d){
+      var tr = document.createElement("tr");
+      if (d.spec || d.n === "Hessen") tr.className = "spec";
+      tr.innerHTML =
+        '<td>' + esc(d.n) + '</td>' +
+        '<td class="n" data-l="1 Kind regulär">' + d.r + ' %</td>' +
+        '<td class="n' + (d.e > d.r ? ' hi' : '') + '" data-l="Elternzeit">' + d.e + ' %</td>' +
+        '<td class="n" data-l="ab 2 Kindern">' + d.z + ' %</td>' +
+        '<td data-l="Grundlage">' + esc(d.g) + '</td>';
+      full.appendChild(tr);
+    });
+  }
+
+  function render(d){
+    var steigt = d.e > d.r;
+    var verdict = steigt
+      ? "Ja — der Satz steigt während der Elternzeit."
+      : (d.n === "Sachsen"
+          ? "Der Satz ist ohnehin schon erhöht."
+          : "Nein — beim ersten Kind bleibt es bei " + d.r + " %.");
+
+    var html =
+      '<div class="rcard' + (steigt ? " up" : "") + '">' +
+        '<div class="rhead">' +
+          '<div>' +
+            '<div class="rk">Dein Dienstherr</div>' +
+            '<h3>' + esc(d.n) + '</h3>' +
+          '</div>' +
+          '<div class="rverdict">' + esc(verdict) + '</div>' +
+        '</div>' +
+        '<div class="rgrid">' +
+          '<div class="rcell"><span class="rl">1 Kind, regulär</span><span class="rv">' + d.r + ' %</span></div>' +
+          '<div class="rcell' + (steigt ? " hot" : "") + '"><span class="rl">Elternzeit, 1 Kind</span><span class="rv">' + d.e + ' %</span></div>' +
+          '<div class="rcell"><span class="rl">Ab 2 Kindern</span><span class="rv">' + d.z + ' %</span></div>' +
+          '<div class="rcell"><span class="rl">PKV-Anteil in der Elternzeit</span><span class="rv">' + (100 - d.e) + ' %</span></div>' +
+        '</div>' +
+        (d.h ? '<div class="rnote"><span class="rk">Besonderheit</span>' + esc(d.h) + '</div>' : '') +
+        '<div class="rfoot">' +
+          '<div><span class="rk">Beitragserstattung</span><b>' + esc(d.eg) + '</b> &middot; ' + esc(d.ee) + '</div>' +
+          '<div class="rsrc"><span class="rk">Rechtsgrundlage</span>' + esc(d.g) + '</div>' +
+        '</div>' +
+      '</div>';
+    result.innerHTML = html;
+  }
+
+  picker.addEventListener("click", function(ev){
+    var b = ev.target.closest(".pbtn");
+    if (!b) return;
+    Array.prototype.forEach.call(picker.querySelectorAll(".pbtn"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    render(DATA[+b.dataset.i]);
+  });
+})();
+</script>
+</body>
+</html>
